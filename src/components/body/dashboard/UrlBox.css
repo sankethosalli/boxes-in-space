@@ -1,0 +1,42 @@
+.UrlBox {
+  padding: 16px;
+  border: 1px blue solid;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.url-ico {
+  width: 24px;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.visit-button {
+  margin-right: 4px;
+}
+
+.modify {
+  /* width: 100%; */
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.modify-heading {
+  margin-bottom: 14px;
+}
+
+.modify-heading > button {
+  margin-left: 14px;
+}
+
+.superscript {
+  color: gainsboro;
+  margin-right: 8px;
+}
+
+.anchor {
+  color: rgb(37, 37, 107);
+}

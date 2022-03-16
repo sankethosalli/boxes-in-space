@@ -1,0 +1,86 @@
+:root {
+    --primary: rgb(2, 117, 216);
+    
+    --success: green;
+
+    --danger: red;
+
+    --warning: 	rgb(240, 173, 78);
+
+    --info: rgb(0, 116, 155);
+
+    --indigo: indigo;
+  }
+
+
+
+
+.google-btn-primary{
+color: var(--primary);
+border-color: var(--primary);
+}
+
+
+.google-btn-primary:hover{
+color: var(--primary);
+}
+
+
+
+
+.google-btn-success{
+    color:var(--success);
+    border-top: var(--success);
+}
+
+.google-btn-success:hover{
+color:var(--success);
+}
+
+
+
+
+.google-btn-danger{
+    color:var(--danger);
+    border-top: var(--danger);
+}
+
+.google-btn-danger:hover{
+color:var(--danger);
+}
+
+
+
+
+.google-btn-warning{
+    color:var(--warning);
+    border-top: var(--warning);
+}
+
+.google-btn-warning:hover{
+color:var(--warning);
+}
+
+
+
+
+.google-btn-info{
+    color:var(--info);
+    border-top: var(--info);
+}
+
+.google-btn-info:hover{
+color:var(--info);
+}
+
+
+
+
+.google-btn-indigo{
+    color:var(--indigo);
+    border-top: var(--indigo);
+}
+
+.google-btn-indigo:hover{
+color:var(--indigo);
+}

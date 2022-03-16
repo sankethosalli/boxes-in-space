@@ -1,0 +1,36 @@
+.checkbox-sm{
+    font-size: 70%;
+    border-radius: 30%;
+    padding: 0.5% 0.9%;
+}
+
+
+.checkbox-md{
+    font-size: 100%;
+    border-radius: 30%;
+    /* padding: 0.5% 0.9%; */
+    padding: 0.8% 2.9%;
+}
+
+
+.checkbox-lg{
+    font-size: 130%;
+    border-radius: 30%;
+    padding: 0.5% 0.9%;
+}
+
+
+.checkbox-xl{
+    font-size: 180%;
+    border-radius: 30%;
+    padding: 0.5% 0.9%;
+}
+
+
+.checkbox-yl{
+    font-size: 230%;
+    border-radius: 30%;
+    padding: 0.5% 0.9%;
+}
+
+

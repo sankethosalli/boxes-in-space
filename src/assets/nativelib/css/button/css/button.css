@@ -1,0 +1,52 @@
+.google-btn-active {
+  background-color: white;
+}
+
+.google-btn-active:hover {
+  text-decoration: none;
+  background-color: rgb(220, 220, 220);
+}
+
+.google-btn-active:focus {
+  outline: none;
+}
+
+.google-btn-inactive {
+  /* display: none; */
+  background-color: rgb(240, 240, 240);
+  /* border: 3px solid 	rgb(128, 128, 128, 0.1); */
+  /* border-top: 30px solid 	rgb(128, 128, 128, 0.1); */
+}
+
+.google-btn-inactive:hover {
+  text-decoration: none;
+  background-color: rgb(220, 220, 220);
+}
+
+.btn-indigo {
+  color: white;
+  background-color: indigo;
+}
+
+.btn-indigo:hover {
+  color: white;
+}
+
+.btn-indigo:focus {
+  box-shadow: 0 0 0.7pt 2pt rgb(149, 0, 255);
+}
+
+.btn-outline-indigo {
+  border: 1px solid indigo;
+  background-color: white;
+  color: indigo;
+}
+
+.btn-outline-indigo:hover {
+  background-color: indigo;
+  color: white;
+}
+
+.btn-outline-indigo:focus {
+  box-shadow: 0 0 0.7pt 2pt rgb(149, 0, 255);
+}

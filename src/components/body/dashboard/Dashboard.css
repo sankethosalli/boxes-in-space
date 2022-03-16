@@ -1,0 +1,11 @@
+.AddElements {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.head-cutter {
+  width: 100%;
+  height: 4px;
+  background-color: black;
+  margin-bottom: 14vh;
+}

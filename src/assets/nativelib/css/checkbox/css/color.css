@@ -1,0 +1,50 @@
+:root {
+    --primary: rgb(2, 117, 216);
+    
+    --success: green;
+
+    --danger: red;
+
+    --warning: 	rgb(240, 173, 78);
+
+    --info: rgb(0, 116, 155);
+
+    --indigo: rgb(128, 35, 194);
+  }
+
+
+
+
+.checkbox-primary{
+  background-color:var(--primary);
+border-color:var(--primary);
+}
+
+ 
+.checkbox-success{
+background-color:var(--success);
+border-color:var(--success);
+}
+
+
+.checkbox-danger{
+  background-color:var(--danger);
+  border-color:var(--danger);
+}
+
+
+.checkbox-warning{
+  background-color:var(--warning);
+border-color:var(--warning);
+}
+
+.checkbox-info{
+  background-color:var(--info);
+border-color:var(--info);
+}
+
+.checkbox-indigo{
+  background-color:var(--indigo);
+border-color:var(--indigo);
+}
+
