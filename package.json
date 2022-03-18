@@ -3,10 +3,17 @@
   "version": "0.1.1",
   "private": true,
   "dependencies": {
+    "@react-spring/animated": "^9.4.4",
+    "@react-spring/core": "^9.4.4",
+    "@react-spring/shared": "^9.4.4",
+    "@react-spring/three": "^9.4.4",
+    "@react-spring/types": "^9.4.4",
+    "@react-three/fiber": "^7.0.26",
     "drei": "1.5.7",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-scripts": "4.0.0",
+    "react-spring": "^9.4.4",
     "react-three-fiber": "5.3.1",
     "three": "0.122.0",
     "use-cannon": "0.5.3"
