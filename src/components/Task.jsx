@@ -1,10 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "react-three-fiber";
+import * as THREE from "three";
+import { Canvas, extend, useThree, useFrame } from "react-three-fiber";
 import { OrbitControls, Stars } from "drei";
+// import { Stars } from "drei";
+// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
 import { Physics, usePlane, useBox } from "use-cannon";
 import { useSpring, animated, a } from "react-spring";
 import "./styles.css";
 const configLocal = require("./config");
+
+function Plane() {
+  const [ref] = usePlane(() => ({
+    rotation: [-Math.PI / 2, 0, 0],
+  }));
+
+  return (
+    <mesh position={[0, 0, 0]} ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
+      <planeBufferGeometry attach="geometry" args={[100, 100]} />
+      <meshLambertMaterial attach="material" color="lightblue" />
+    </mesh>
+  );
+}
 
 const getActiveRange = () => {
   return (
@@ -12,6 +29,19 @@ const getActiveRange = () => {
       configLocal.SCALE_RANGE[0] * 10) /
     10
   );
+};
+
+// extend({ OrbitControls });
+
+const Controls = () => {
+  const orbitRef = useRef();
+  const { camera, gl } = useThree();
+
+  useFrame(() => {
+    orbitRef.current.update();
+  });
+
+  return <orbitcontrols ref={orbitRef} args={[camera, gl.domElement]} />;
 };
 
 function Box({ position }) {
@@ -34,9 +64,9 @@ function Box({ position }) {
   };
 
   // Rotation Animation
-  useFrame(() => {
-    meshRef.current.rotation.y += 0.01;
-  });
+  // useFrame(() => {
+  //   meshRef.current.rotation.y += 0.01;
+  // });
 
   useEffect(() => {
     meshRef.current.rotation.x += Math.floor(
@@ -75,15 +105,11 @@ function Box({ position }) {
   );
 }
 
-function Plane() {
-  // const [ref] = usePlane(() => ({
-  //   rotation: [-Math.PI / 2, 0, 0],
-  // }));
-  // ref={ref} rotation={[-Math.PI / 2, 0, 0]}
+function Torus({ position }) {
   return (
-    <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeBufferGeometry attach="geometry" args={[100, 100]} />
-      <meshLambertMaterial attach="material" color="lightblue" />
+    <mesh>
+      <torusBufferGeometry attach="geometry" position={[10, 3, 16, 100]} />
+      <meshBasicMaterial attach="material" color={"0xffff00"} />
     </mesh>
   );
 }
@@ -91,15 +117,17 @@ function Plane() {
 export default function Task() {
   const [boxes, setBoxes] = useState(() => []);
   return (
-    <Canvas>
-      <OrbitControls />
+    <Canvas camera={{ position: [0, 0, 5] }}>
+      {/* <OrbitControls /> */}
+      {/* <Controls /> */}
       <Stars />
       <ambientLight intensity={0.5} />
-      <spotLight position={[10, 15, 10]} angle={0.3} />
+      <spotLight position={[10, 15, 10]} angle={0.3} penumbra={1} />
 
       <Physics>
         {/* <Plane /> */}
         {/* x,y,z */}
+        {/* <Torus /> */}
         <Box position={[0, 2, 0]} />
         <Box position={[-2, 2, 0]} />
         <Box position={[-4, 2, 0]} />
