@@ -1,57 +1,74 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Canvas } from "react-three-fiber";
+import { Canvas, useFrame } from "react-three-fiber";
 import { OrbitControls, Stars } from "drei";
 import { Physics, usePlane, useBox } from "use-cannon";
 import { useSpring, animated, a } from "react-spring";
 import "./styles.css";
+const configLocal = require("./config");
 
-const COLORS = [
-  "black",
-  "silver",
-  "gray",
-  "white",
-  "maroon",
-  "red",
-  "purple",
-  "fuchsia",
-  "green",
-  "lime",
-  "olive",
-  "yellow",
-  "navy",
-  "blue",
-  "teal",
-  "aqua",
-];
+const getActiveRange = () => {
+  return (
+    (Math.floor(Math.random() * configLocal.SCALE_RANGE[1] * 10) +
+      configLocal.SCALE_RANGE[0] * 10) /
+    10
+  );
+};
 
 function Box({ position }) {
+  const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
   const [active, setActive] = useState(false);
   const props = useSpring({
     scale: active ? [0.8, 0.8, 0.8] : [0.4, 0.4, 0.4],
-    color: hovered ? COLORS[Math.floor(Math.random() * COLORS.length)] : "grey",
+    color: hovered
+      ? configLocal.COLORS[
+          Math.floor(Math.random() * configLocal.COLORS.length)
+        ]
+      : "grey",
   });
 
-  const [ref, api] = useBox(() => ({ mass: 0, position: position }));
+  // const [ref, api] = useBox(() => ({ mass: 0, position: position }));
 
   const handleClick = () => {
     setActive(() => !active);
   };
 
+  // Rotation Animation
+  useFrame(() => {
+    meshRef.current.rotation.y += 0.01;
+  });
+
+  useEffect(() => {
+    meshRef.current.rotation.x += Math.floor(
+      Math.random() * configLocal.ROTATE_MAX
+    );
+    meshRef.current.rotation.y += Math.floor(
+      Math.random() * configLocal.ROTATE_MAX
+    );
+    meshRef.current.rotation.z += Math.floor(
+      Math.random() * configLocal.ROTATE_MAX
+    );
+  });
+
   return (
     <mesh
       onClick={handleClick}
-      ref={ref}
+      ref={meshRef}
       position={position}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      scale={active ? [0.8, 0.8, 0.8] : [0.4, 0.4, 0.4]}
+      // scale={active ? [0.8, 0.8, 0.8] : [0.4, 0.4, 0.4]}
+      scale={[getActiveRange(), getActiveRange(), getActiveRange()]}
     >
       <boxBufferGeometry attach="geometry" />
       <meshLambertMaterial
         attach="material"
         color={
-          hovered ? COLORS[Math.floor(Math.random() * COLORS.length)] : "grey"
+          hovered
+            ? "grey"
+            : configLocal.COLORS[
+                Math.floor(Math.random() * configLocal.COLORS.length)
+              ]
         }
       />
     </mesh>
@@ -82,11 +99,24 @@ export default function Task() {
 
       <Physics>
         {/* <Plane /> */}
-        <Box position={[0, 0, 0]} />
+        {/* x,y,z */}
         <Box position={[0, 2, 0]} />
-        <Box position={[2, 0, 0]} />
+        <Box position={[-2, 2, 0]} />
+        <Box position={[-4, 2, 0]} />
         <Box position={[2, 2, 0]} />
-        <Box position={[2, 4, 0]} />
+        <Box position={[4, 2, 0]} />
+
+        <Box position={[0, 0, 0]} />
+        <Box position={[-2, 0, 0]} />
+        <Box position={[-4, 0, 0]} />
+        <Box position={[2, 0, 0]} />
+        <Box position={[4, 0, 0]} />
+
+        <Box position={[0, -2, 0]} />
+        <Box position={[-2, -2, 0]} />
+        <Box position={[-4, -2, 0]} />
+        <Box position={[2, -2, 0]} />
+        <Box position={[4, -2, 0]} />
       </Physics>
     </Canvas>
   );
