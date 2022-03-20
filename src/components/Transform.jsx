@@ -22,7 +22,7 @@ const ACTIONS = {
   },
 };
 
-export default function Transform({ box }) {
+export default function Transform({ index, box }) {
   function rotate(action) {
     switch (action) {
       case ACTIONS.ROTATE.LEFT:
@@ -82,17 +82,28 @@ export default function Transform({ box }) {
     <div className={styles.Transform}>
       <div className={styles.Header}>
         {box ? (
-          <h1>Transform</h1>
+          <>
+            <h1>Transform</h1>
+            <h6>(Click On any Box to Select)</h6>
+            <h5>Or</h5>
+            <h6>(Click On same Box to Deselect)</h6>
+          </>
         ) : (
           <>
             <h1>Transform</h1>
-            <h6>(Click On any Box)</h6>
+            <h6>(Click On any Box to Select)</h6>
           </>
         )}
       </div>
 
       {box ? (
         <div className={styles.Controls}>
+          <u>
+            <h3>Box Id: {index}</h3>
+          </u>
+
+          <br />
+          <br />
           <div className={styles.Section}>
             <h2>Rotate</h2>
             <div>
@@ -126,7 +137,6 @@ export default function Transform({ box }) {
               </button>
             </div>
           </div>
-
           <div className={styles.Section}>
             <h2>Scale</h2>
             <button
@@ -143,7 +153,6 @@ export default function Transform({ box }) {
               Enlarge
             </button>
           </div>
-
           <div className={styles.Section}>
             <h2>Translate</h2>
             <div>

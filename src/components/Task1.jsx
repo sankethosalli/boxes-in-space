@@ -6,47 +6,10 @@ import { Physics } from "use-cannon";
 import Transform from "./Transform";
 import styles from "./Task.module.scss";
 const configLocal = require("./config");
+const utilsLocal = require("./utils");
 
-const getActiveRange = () => {
-  return (
-    (Math.floor(Math.random() * configLocal.SCALE_RANGE[1] * 10) +
-      configLocal.SCALE_RANGE[0] * 10) /
-    10
-  );
-};
-
-const getTranslateRange = () => {
-  return (
-    (Math.floor(Math.random() * configLocal.TRANSLATE_RANGE[1] * 10) +
-      configLocal.TRANSLATE_RANGE[0] * 10) /
-    10
-  );
-};
-
-const getBoxes = () => {
-  const boxes = configLocal.BOX_MAX;
-  const array = [];
-  for (let i = 0; i < boxes; i++) {
-    array.push({
-      index: i,
-      position: [getTranslateRange(), getTranslateRange(), getTranslateRange()],
-      color:
-        configLocal.COLORS[
-          Math.floor(Math.random() * configLocal.COLORS.length)
-        ],
-      rotation: {
-        x: Math.floor(Math.random() * configLocal.ROTATE_MAX),
-        y: Math.floor(Math.random() * configLocal.ROTATE_MAX),
-        z: Math.floor(Math.random() * configLocal.ROTATE_MAX),
-      },
-      scale: [getActiveRange(), getActiveRange(), getActiveRange()],
-      active: false,
-      ref: null,
-    });
-  }
-  return array;
-};
-const LOADED_BOXES = getBoxes();
+const getBoxes = utilsLocal.getBoxes;
+const LOADED_BOXES = getBoxes(configLocal);
 
 function Box({
   index,
@@ -102,6 +65,8 @@ export default function Task() {
   const [box, setBox] = useState(() => {});
   const [boxDirect, setBoxDirect] = useState(() => {});
 
+  const [selected, setSelected] = useState(() => []);
+
   useEffect(() => {
     const boxInner = boxes.filter((value) => value.active === true);
 
@@ -114,7 +79,6 @@ export default function Task() {
   }, [boxes]);
 
   useEffect(() => {
-    // console.log(box, "Task");
     if (box) {
       const modifiedBoxes = boxes.map((value, indexInner) => {
         if (value.index === box.index) {
@@ -134,10 +98,10 @@ export default function Task() {
     <>
       <div className="row" style={{ padding: 0, margin: 0 }}>
         <div className="col-2">
-          <Transform box={boxDirect} />
+          <Transform index={box ? box.index : null} box={boxDirect} />
         </div>
 
-        <div className={"col-10 " + styles.Canvas}>
+        <div className={"col-10 " + styles.Canvas} style={{ outline: "none" }}>
           <Canvas camera={{ position: [0, 0, 5] }}>
             <OrbitControls />
             <ambientLight intensity={0.5} />
@@ -165,6 +129,8 @@ export default function Task() {
                     boxes={boxes}
                     setBoxes={setBoxes}
                     setBoxDirect={setBoxDirect}
+                    selected={selected}
+                    setSelected={setSelected}
                   />
                 );
               })}
