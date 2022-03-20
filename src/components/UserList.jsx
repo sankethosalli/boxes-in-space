@@ -13,7 +13,7 @@ export default function UserList({
   const handleTransform = (box) => {
     const modifiedBoxes = boxes.map((value, indexInner) => {
       if (value.index === box.index) {
-        value.active = !value.active;
+        value.active = true;
         setBoxDirect(() => value.ref);
         return value;
       } else {
