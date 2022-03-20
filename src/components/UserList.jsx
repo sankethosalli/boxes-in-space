@@ -48,20 +48,23 @@ export default function UserList({
               selected.map((value, index) => {
                 return (
                   <li key={index} className={styles.li}>
-                    {value.index}{" "}
-                    <button
-                      onClick={() => handleTransform(value)}
-                      className="btn btn-sm btn-info"
-                    >
-                      Transform
-                    </button>
-                    &nbsp;
-                    <button
-                      onClick={() => handleDrop(value)}
-                      className="btn btn-sm btn-danger"
-                    >
-                      Drop
-                    </button>
+                    <span>{value.index}</span>
+
+                    <span style={{ float: "right" }}>
+                      <button
+                        onClick={() => handleTransform(value)}
+                        className="btn btn-sm btn-info"
+                      >
+                        Transform
+                      </button>
+                      &nbsp;
+                      <button
+                        onClick={() => handleDrop(value)}
+                        className="btn btn-sm btn-danger"
+                      >
+                        Drop
+                      </button>
+                    </span>
                   </li>
                 );
               })}
