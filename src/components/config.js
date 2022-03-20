@@ -21,4 +21,4 @@ export const SCALE_RANGE = [0.2, 0.6];
 
 export const TRANSLATE_RANGE = [-4, 8];
 
-export const BOX_MAX = 4;
+export const BOX_MAX = 44;

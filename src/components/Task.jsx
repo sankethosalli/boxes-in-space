@@ -53,9 +53,7 @@ function Box({ position, color, rotation, setBox }) {
 
   useEffect(() => {
     meshRef.current.rotation.x += rotation.x;
-
     meshRef.current.rotation.y += rotation.y;
-
     meshRef.current.rotation.z += rotation.z;
   });
 
@@ -76,7 +74,7 @@ export default function Task() {
   const [boxes, setBoxes] = useState(() => []);
   const [box, setBox] = useState(() => null);
 
-  console.log(LOADED_BOXES, "Task");
+  // console.log(LOADED_BOXES, "Task");
   return (
     <>
       <div className="row" style={{ padding: 0, margin: 0 }}>
@@ -93,11 +91,13 @@ export default function Task() {
               {LOADED_BOXES.map((value, index) => {
                 const color = value.color;
                 const position = value.position;
+                const rotation = value.rotation;
                 return (
                   <Box
                     key={index}
                     position={[position[0], position[1], position[2]]}
-                    color={value.color}
+                    color={color}
+                    rotation={rotation}
                     setBox={setBox}
                   />
                 );
