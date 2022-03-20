@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import styles from "./Transform.module.scss";
 
 const ACTIONS = {
@@ -86,7 +86,7 @@ export default function Transform({ box }) {
         ) : (
           <>
             <h1>Transform</h1>
-            <h6>(Click On Box)</h6>
+            <h6>(Click On any Box)</h6>
           </>
         )}
       </div>

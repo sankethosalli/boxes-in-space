@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Task from "./components/Task";
 // import Graphic2 from "./components/Graphic2";
 // import Graphic from "./components/Graphic";

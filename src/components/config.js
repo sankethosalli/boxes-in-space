@@ -11,6 +11,7 @@ export const COLORS = [
   "blue",
   "teal",
   "aqua",
+  "orange",
 ];
 
 export const ROTATE_MAX = 10;
@@ -21,4 +22,4 @@ export const SCALE_RANGE = [0.2, 0.6];
 
 export const TRANSLATE_RANGE = [-4, 8];
 
-export const BOX_MAX = 44;
+export const BOX_MAX = 52;
