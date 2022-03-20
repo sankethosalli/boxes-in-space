@@ -37,13 +37,14 @@ const getBoxes = () => {
         y: Math.floor(Math.random() * configLocal.ROTATE_MAX),
         z: Math.floor(Math.random() * configLocal.ROTATE_MAX),
       },
+      scale: [getActiveRange(), getActiveRange(), getActiveRange()],
     });
   }
   return array;
 };
 const LOADED_BOXES = getBoxes();
 
-function Box({ position, color, rotation, setBox }) {
+function Box({ position, color, rotation, scale, setBox }) {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
 
@@ -52,9 +53,9 @@ function Box({ position, color, rotation, setBox }) {
   };
 
   useEffect(() => {
-    meshRef.current.rotation.x += rotation.x;
-    meshRef.current.rotation.y += rotation.y;
-    meshRef.current.rotation.z += rotation.z;
+    meshRef.current.rotation.x = rotation.x;
+    meshRef.current.rotation.y = rotation.y;
+    meshRef.current.rotation.z = rotation.z;
   });
 
   return (
@@ -62,7 +63,7 @@ function Box({ position, color, rotation, setBox }) {
       onClick={handleClick}
       ref={meshRef}
       position={position}
-      scale={[getActiveRange(), getActiveRange(), getActiveRange()]}
+      scale={[scale[0], scale[1], scale[2]]}
     >
       <boxBufferGeometry attach="geometry" />
       <meshLambertMaterial attach="material" color={hovered ? "grey" : color} />
@@ -92,12 +93,14 @@ export default function Task() {
                 const color = value.color;
                 const position = value.position;
                 const rotation = value.rotation;
+                const scale = value.scale;
                 return (
                   <Box
                     key={index}
                     position={[position[0], position[1], position[2]]}
                     color={color}
                     rotation={rotation}
+                    scale={scale}
                     setBox={setBox}
                   />
                 );
