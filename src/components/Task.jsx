@@ -52,11 +52,11 @@ function Box({ position, color, rotation, setBox }) {
   };
 
   useEffect(() => {
-    meshRef.current.rotation.x += rotation.x;
+    meshRef.current.rotation.x = rotation.x;
 
-    meshRef.current.rotation.y += rotation.y;
+    meshRef.current.rotation.y = rotation.y;
 
-    meshRef.current.rotation.z += rotation.z;
+    meshRef.current.rotation.z = rotation.z;
   });
 
   return (
