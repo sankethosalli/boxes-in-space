@@ -33,9 +33,9 @@ const getBoxes = () => {
           Math.floor(Math.random() * configLocal.COLORS.length)
         ],
       rotation: {
-        x: Math.random() * configLocal.ROTATE_MAX,
-        y: Math.random() * configLocal.ROTATE_MAX,
-        z: Math.random() * configLocal.ROTATE_MAX,
+        x: Math.floor(Math.random() * configLocal.ROTATE_MAX),
+        y: Math.floor(Math.random() * configLocal.ROTATE_MAX),
+        z: Math.floor(Math.random() * configLocal.ROTATE_MAX),
       },
     });
   }
@@ -52,11 +52,11 @@ function Box({ position, color, rotation, setBox }) {
   };
 
   useEffect(() => {
-    meshRef.current.rotation.x = rotation.x;
+    meshRef.current.rotation.x += rotation.x;
 
-    meshRef.current.rotation.y = rotation.y;
+    meshRef.current.rotation.y += rotation.y;
 
-    meshRef.current.rotation.z = rotation.z;
+    meshRef.current.rotation.z += rotation.z;
   });
 
   return (
