@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import * as THREE from "three";
-import { Canvas, extend, useThree, useFrame } from "react-three-fiber";
-import { OrbitControls, Stars } from "drei";
+import React, { useState, useEffect, useRef } from "react";
+import { Canvas } from "react-three-fiber";
 
-import { Physics, usePlane, useBox } from "use-cannon";
-import { useSpring, animated, a } from "react-spring";
+import { Physics } from "use-cannon";
 import Transform from "./Transform";
 import styles from "./Task.module.scss";
 const configLocal = require("./config");
@@ -17,46 +14,60 @@ const getActiveRange = () => {
   );
 };
 
-function Box({ position, setBox }) {
+const getTranslateRange = () => {
+  return (
+    (Math.floor(Math.random() * configLocal.TRANSLATE_RANGE[1] * 10) +
+      configLocal.TRANSLATE_RANGE[0] * 10) /
+    10
+  );
+};
+
+const getBoxes = () => {
+  const boxes = configLocal.BOX_MAX;
+  const array = [];
+  for (let i = 0; i < boxes; i++) {
+    array.push({
+      position: [getTranslateRange(), getTranslateRange(), getTranslateRange()],
+      color:
+        configLocal.COLORS[
+          Math.floor(Math.random() * configLocal.COLORS.length)
+        ],
+      rotation: {
+        x: Math.random() * configLocal.ROTATE_MAX,
+        y: Math.random() * configLocal.ROTATE_MAX,
+        z: Math.random() * configLocal.ROTATE_MAX,
+      },
+    });
+  }
+  return array;
+};
+const LOADED_BOXES = getBoxes();
+
+function Box({ position, color, rotation, setBox }) {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
-  const [active, setActive] = useState(false);
-  const props = useSpring({
-    scale: active ? [0.8, 0.8, 0.8] : [0.4, 0.4, 0.4],
-    color: hovered
-      ? configLocal.COLORS[
-          Math.floor(Math.random() * configLocal.COLORS.length)
-        ]
-      : "grey",
-  });
 
   const handleClick = () => {
-    setActive(() => !active);
     setBox(() => meshRef);
   };
 
-  return (
-    <mesh onClick={handleClick} ref={meshRef} position={position}>
-      <boxBufferGeometry attach="geometry" />
-      <meshLambertMaterial
-        attach="material"
-        color={
-          hovered
-            ? "grey"
-            : configLocal.COLORS[
-                Math.floor(Math.random() * configLocal.COLORS.length)
-              ]
-        }
-      />
-    </mesh>
-  );
-}
+  useEffect(() => {
+    meshRef.current.rotation.x += rotation.x;
 
-function Torus({ position }) {
+    meshRef.current.rotation.y += rotation.y;
+
+    meshRef.current.rotation.z += rotation.z;
+  });
+
   return (
-    <mesh>
-      <torusBufferGeometry attach="geometry" position={[10, 3, 16, 100]} />
-      <meshBasicMaterial attach="material" color={"0xffff00"} />
+    <mesh
+      onClick={handleClick}
+      ref={meshRef}
+      position={position}
+      scale={[getActiveRange(), getActiveRange(), getActiveRange()]}
+    >
+      <boxBufferGeometry attach="geometry" />
+      <meshLambertMaterial attach="material" color={hovered ? "grey" : color} />
     </mesh>
   );
 }
@@ -65,6 +76,7 @@ export default function Task() {
   const [boxes, setBoxes] = useState(() => []);
   const [box, setBox] = useState(() => null);
 
+  console.log(LOADED_BOXES, "Task");
   return (
     <>
       <div className="row" style={{ padding: 0, margin: 0 }}>
@@ -78,23 +90,18 @@ export default function Task() {
             <spotLight position={[10, 15, 10]} angle={0.3} penumbra={1} />
 
             <Physics>
-              <Box position={[0, 2, 0]} setBox={setBox} />
-              <Box position={[-2, 2, 0]} setBox={setBox} />
-              <Box position={[-4, 2, 0]} setBox={setBox} />
-              <Box position={[2, 2, 0]} setBox={setBox} />
-              <Box position={[4, 2, 0]} setBox={setBox} />
-
-              <Box position={[0, 0, 0]} setBox={setBox} />
-              <Box position={[-2, 0, 0]} setBox={setBox} />
-              <Box position={[-4, 0, 0]} setBox={setBox} />
-              <Box position={[2, 0, 0]} setBox={setBox} />
-              <Box position={[4, 0, 0]} setBox={setBox} />
-
-              <Box position={[0, -2, 0]} setBox={setBox} />
-              <Box position={[-2, -2, 0]} setBox={setBox} />
-              <Box position={[-4, -2, 0]} setBox={setBox} />
-              <Box position={[2, -2, 0]} setBox={setBox} />
-              <Box position={[4, -2, 0]} setBox={setBox} />
+              {LOADED_BOXES.map((value, index) => {
+                const color = value.color;
+                const position = value.position;
+                return (
+                  <Box
+                    key={index}
+                    position={[position[0], position[1], position[2]]}
+                    color={value.color}
+                    setBox={setBox}
+                  />
+                );
+              })}
             </Physics>
           </Canvas>
         </div>

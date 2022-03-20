@@ -16,5 +16,9 @@ export const COLORS = [
 export const ROTATE_MAX = 10;
 // export const ROTATE_MAX = 1;
 
-export const SCALE_RANGE = [0.5, 1.2];
+export const SCALE_RANGE = [0.2, 0.6];
 // export const SCALE_RANGE = [1, 1];
+
+export const TRANSLATE_RANGE = [-4, 8];
+
+export const BOX_MAX = 4;
