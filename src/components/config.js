@@ -22,4 +22,10 @@ export const SCALE_RANGE = [0.2, 0.4];
 
 export const TRANSLATE_RANGE = [-3, 6];
 
-export const BOX_MAX = 152;
+export const BOX_MAX = 74;
+
+export const LEFT_NAVIGATION = {
+  LIST: "LIST",
+  TRANSFORM: "TRANSFORM",
+  DROP: "DROP",
+};

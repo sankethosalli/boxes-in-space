@@ -108,14 +108,14 @@ export default function Transform({ index, box }) {
             <h2>Rotate</h2>
             <div>
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => rotate(ACTIONS.ROTATE.LEFT)}
               >
                 Left
               </button>
               &nbsp;
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => rotate(ACTIONS.ROTATE.RIGHT)}
               >
                 Right
@@ -123,14 +123,14 @@ export default function Transform({ index, box }) {
             </div>
             <div>
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => rotate(ACTIONS.ROTATE.UP)}
               >
                 Up
               </button>
               &nbsp;
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => rotate(ACTIONS.ROTATE.DOWN)}
               >
                 Down
@@ -140,14 +140,14 @@ export default function Transform({ index, box }) {
           <div className={styles.Section}>
             <h2>Scale</h2>
             <button
-              className="btn btn-primary"
+              className="btn btn-sm btn-primary"
               onClick={() => scale(ACTIONS.SCALE.SHRINK)}
             >
               Shrink
             </button>
             &nbsp;
             <button
-              className="btn btn-primary"
+              className="btn btn-sm btn-primary"
               onClick={() => scale(ACTIONS.SCALE.ENLARGE)}
             >
               Enlarge
@@ -157,14 +157,14 @@ export default function Transform({ index, box }) {
             <h2>Translate</h2>
             <div>
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => translate(ACTIONS.TRANSLATE.LEFT)}
               >
                 Left
               </button>
               &nbsp;
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => translate(ACTIONS.TRANSLATE.RIGHT)}
               >
                 Right
@@ -172,14 +172,14 @@ export default function Transform({ index, box }) {
             </div>
             <div>
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => translate(ACTIONS.TRANSLATE.UP)}
               >
                 Up
               </button>
               &nbsp;
               <button
-                className="btn btn-primary"
+                className="btn btn-sm btn-primary"
                 onClick={() => translate(ACTIONS.TRANSLATE.DOWN)}
               >
                 Down
